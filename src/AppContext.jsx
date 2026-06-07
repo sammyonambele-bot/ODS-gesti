@@ -48,6 +48,11 @@ export function AppProvider({ children }) {
     setProduits(prev => [...prev, { ...produit, id: Date.now() }])
   }
 
+  function supprimerProduit(id) {
+    setProduits(prev => prev.filter(p => p.id !== id))
+  }
+
+
   function ajouterTransaction(transaction) {
     setTransactions(prev => [transaction, ...prev])
   }
@@ -71,7 +76,7 @@ export function AppProvider({ children }) {
 
   return (
     <AppContext.Provider value={{
-      produits, ajouterProduit,
+      produits, ajouterProduit, supprimerProduit,
       transactions, ajouterTransaction,
       ventes, ajouterVente,
       config, setConfig

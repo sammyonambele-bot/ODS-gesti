@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useApp } from "../AppContext"
 
 export default function Catalogue() {
-  const { produits, ajouterProduit } = useApp()
+  const { produits, ajouterProduit, supprimerProduit } = useApp()
   const [categorie, setCategorie] = useState("")
   const [nom, setNom] = useState("")
   const [pa, setPa] = useState("")
@@ -21,6 +21,8 @@ export default function Catalogue() {
     setCategorie("")
     setAfficherFormulaire(false)
   }
+  
+  
 
   const produitsFiltres = produits.filter(p =>
     p.nom.toLowerCase().includes(recherche.toLowerCase()) ||
@@ -113,6 +115,8 @@ export default function Catalogue() {
                 <th className="text-right px-6 py-4">Prix vente</th>
                 <th className="text-right px-6 py-4">Marge</th>
                 <th className="text-right px-6 py-4">Taux</th>
+                <th className="px-6 py-4"></th>
+
               </tr>
             </thead>
             <tbody>
@@ -130,6 +134,14 @@ export default function Catalogue() {
                       {p.tauxMarge}%
                     </span>
                   </td>
+                  <td className="px-6 py-4 text-center">
+                   <button
+                    onClick={() => supprimerProduit(p.id)}
+                  className="text-red-400 hover:text-red-600 text-lg"
+                   >
+                  🗑️
+                </button>
+                </td>
                 </tr>
               ))}
             </tbody>
